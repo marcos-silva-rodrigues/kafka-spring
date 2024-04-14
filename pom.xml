@@ -11,6 +11,7 @@
     <modules>
         <module>pix-consumidor</module>
         <module>pix-produtor</module>
+        <module>pix-stream</module>
     </modules>
 
     <parent>
