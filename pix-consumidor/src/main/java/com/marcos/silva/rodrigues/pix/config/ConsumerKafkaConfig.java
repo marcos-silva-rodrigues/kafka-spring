@@ -1,6 +1,8 @@
 package com.marcos.silva.rodrigues.pix.config;
 
 import com.marcos.silva.rodrigues.pix.dto.PixDTO;
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -54,10 +56,17 @@ public class ConsumerKafkaConfig {
             StringDeserializer.class);
     props.put(
             ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-            JsonDeserializer.class);
+            KafkaAvroDeserializer.class);
     props.put(
             JsonDeserializer.TRUSTED_PACKAGES,
             "*");
+
+    props.put(
+            "schema.registry.url",
+            "http://localhost:8081"
+    );
+
+    props.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
 
       props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 //    props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 100);

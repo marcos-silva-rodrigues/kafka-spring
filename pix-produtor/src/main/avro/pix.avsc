@@ -1,0 +1,13 @@
+{
+    "namespace": "com.marcos.silva.rodrigues.pix",
+    "type": "record",
+    "name": "PixRecord",
+    "fields": [
+        {"name": "identicador", "type": "string"},
+        {"name": "chaveOrigem", "type": "string"},
+        {"name": "chaveDestino", "type": "string"},
+        {"name": "valor", "type": "double"},
+        {"name": "dataTransferencia", "type": "string"},
+        {"name": "status", "type": "string"}
+    ]
+}

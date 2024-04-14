@@ -1,5 +1,6 @@
 package com.marcos.silva.rodrigues.pix.consumidor;
 
+import com.marcos.silva.rodrigues.pix.avro.PixRecord;
 import com.marcos.silva.rodrigues.pix.dto.PixDTO;
 import com.marcos.silva.rodrigues.pix.dto.PixStatus;
 import com.marcos.silva.rodrigues.pix.exception.KeyNotFoundException;
@@ -31,14 +32,14 @@ public class PixValidator {
           autoCreateTopics = "true",
           include = KeyNotFoundException.class
   )
-  public void processaPix(PixDTO pixDTO, Acknowledgment acknowledgment) {
+  public void processaPix(PixRecord pixRecord, Acknowledgment acknowledgment) {
 //    acknowledgment.acknowledge();
-    System.out.println("Pix  recebido: " + pixDTO.getIdentifier());
+    System.out.println("Pix  recebido: " + pixRecord.getIdenticador());
 
-    Pix pix = pixRepository.findByIdentifier(pixDTO.getIdentifier());
+    Pix pix = pixRepository.findByIdentifier(pixRecord.getIdenticador().toString());
 
-    Key origem = keyRepository.findByChave(pixDTO.getChaveOrigem());
-    Key destino = keyRepository.findByChave(pixDTO.getChaveDestino());
+    Key origem = keyRepository.findByChave(pixRecord.getChaveOrigem().toString());
+    Key destino = keyRepository.findByChave(pixRecord.getChaveDestino().toString());
 
 
     if (origem == null || destino == null) {
