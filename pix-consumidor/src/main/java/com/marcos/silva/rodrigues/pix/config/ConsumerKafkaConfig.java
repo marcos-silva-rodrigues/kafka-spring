@@ -1,6 +1,7 @@
 package com.marcos.silva.rodrigues.pix.config;
 
 import com.marcos.silva.rodrigues.pix.dto.PixDTO;
+import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -57,6 +58,11 @@ public class ConsumerKafkaConfig {
     props.put(
             JsonDeserializer.TRUSTED_PACKAGES,
             "*");
+
+      props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+//    props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 100);
+//    props.put(ConsumerConfig.ALLOW_AUTO_CREATE_TOPICS_CONFIG, true);
+//    props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
     return new DefaultKafkaConsumerFactory<>(props);
   }
 
