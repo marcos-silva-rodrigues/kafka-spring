@@ -16,20 +16,20 @@ public class PixService {
   @Autowired
   private final PixRepository pixRepository;
 
-  @Autowired
-  private final KafkaTemplate<String, PixDTO> kafkaTemplate;
+//  @Autowired
+//  private final KafkaTemplate<String, PixDTO> kafkaTemplate;
 
   public PixDTO salvarPix(PixDTO pixDTO) {
     pixRepository.save(Pix.toEntity(pixDTO));
 
-    PixRecord pixRecord = PixRecord.newBuilder()
-            .setChaveDestino(pixDTO.getChaveDestino())
-            .setChaveOrigem(pixDTO.getChaveOrigem())
-            .setIdenticador(pixDTO.getIdentifier())
-            .setStatus(pixDTO.getStatus().toString())
-            .setDataTransferencia(pixDTO.getDataTransferencia().toString())
-            .build();
-    kafkaTemplate.send("pix-topic", pixDTO.getIdentifier(), pixDTO);
+//    PixRecord pixRecord = PixRecord.newBuilder()
+//            .setChaveDestino(pixDTO.getChaveDestino())
+//            .setChaveOrigem(pixDTO.getChaveOrigem())
+//            .setIdenticador(pixDTO.getIdentifier())
+//            .setStatus(pixDTO.getStatus().toString())
+//            .setDataTransferencia(pixDTO.getDataTransferencia().toString())
+//            .build();
+//    kafkaTemplate.send("pix-topic", pixDTO.getIdentifier(), pixDTO);
     return pixDTO;
   }
 
